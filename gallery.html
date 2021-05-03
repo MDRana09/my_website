@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+/* The grid: Four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the expanded image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div style="text-align:center">
+  <h2>Photos captured by me</h2>
+  <p>Click on the images below:</p>
+</div>
+
+<!-- The four columns -->
+<div class="row">
+  <div class="column">
+    <img src="https://scontent.fdac5-1.fna.fbcdn.net/v/t1.15752-9/182211986_1163085097468226_7823225310821043527_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=ae9488&_nc_ohc=XxSIx0jSyvsAX_82Xyk&_nc_ht=scontent.fdac5-1.fna&oh=bb1510e0bf826d92fabb2af1e3a6135a&oe=60B41F26" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="https://scontent.fdac5-1.fna.fbcdn.net/v/t1.15752-9/180920700_752525415626813_6732022067923025157_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=ae9488&_nc_ohc=KM7xqWz3kiMAX8ND9l9&_nc_ht=scontent.fdac5-1.fna&oh=0a8bdb4eaa8f98e7e39c35af0894f574&oe=60B729EC" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="https://scontent.fdac5-1.fna.fbcdn.net/v/t1.15752-9/s2048x2048/182617638_132099482270223_3107011953803843242_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=ae9488&_nc_ohc=IKbGB4NHskEAX864BSe&_nc_ht=scontent.fdac5-1.fna&tp=7&oh=aca93e44de5dbb1d21e42db341162f12&oe=60B4FFB4" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="https://images.hdqwalls.com/download/mclaren-720s-spider-2019-upper-view-f7-3840x2160.jpg" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="https://scontent.fdac5-1.fna.fbcdn.net/v/t1.15752-9/s2048x2048/182266475_1377991775900181_385802730989408972_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=ae9488&_nc_ohc=yJ61_nXjZAcAX-MCxYv&_nc_ht=scontent.fdac5-1.fna&tp=7&oh=50725612677e59b2659b990ed3d1c173&oe=60B3BA2B" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="https://scontent.fdac5-2.fna.fbcdn.net/v/t1.15752-9/182112799_228955985673165_5411366002729938945_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=ae9488&_nc_ohc=dX8HE7rmmn8AX_fWUNJ&_nc_ht=scontent.fdac5-2.fna&oh=903988dc86d962ec4951ca87d6b43eea&oe=60B5C953" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="https://scontent.fdac5-1.fna.fbcdn.net/v/t1.15752-9/182102136_472066790673840_5950875031728591720_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=ae9488&_nc_ohc=vBm534Q9EYgAX9L2bhK&_nc_ht=scontent.fdac5-1.fna&oh=1ad2c0037d2b5291a1463199626dc4c1&oe=60B5903C" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+  <div class="column">
+    <img src="https://scontent.fdac5-1.fna.fbcdn.net/v/t1.15752-9/s2048x2048/181658939_142963921175558_5168805287556995925_n.jpg?_nc_cat=111&ccb=1-3&_nc_sid=ae9488&_nc_ohc=heWopUm14IgAX9dZLT1&_nc_ht=scontent.fdac5-1.fna&tp=7&oh=1063f83bca1cde57578cf6cc1f522fd8&oe=60B3ABA7" alt="" style="width:100%" onclick="myFunction(this);">
+  </div>
+</div>
+
+<div class="container">
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+  <img id="expandedImg" style="width:100%">
+  <div id="imgtext"></div>
+</div>
+
+<script>
+function myFunction(imgs) {
+  var expandImg = document.getElementById("expandedImg");
+  var imgText = document.getElementById("imgtext");
+  expandImg.src = imgs.src;
+  imgText.innerHTML = imgs.alt;
+  expandImg.parentElement.style.display = "block";
+}
+</script>
+
+</body>
+</html>
